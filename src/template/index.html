@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能对话助手</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>智能对话助手</h1>
+            <p>基于FastAPI的AI对话系统</p>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="welcome-message">
+                您好！我是AI助手，有什么问题可以随时问我 😊<br>
+                例如："什么是人工智能？" 或 "Python如何连接数据库？"
+            </div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator">
+            AI助手正在思考中...
+        </div>
+
+        <div class="input-area">
+            <textarea
+                class="message-input"
+                id="messageInput"
+                placeholder="输入您的问题..."
+                rows="1"
+            ></textarea>
+            <button class="send-button" id="sendButton">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="script_stream.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+</body>
+</html>
