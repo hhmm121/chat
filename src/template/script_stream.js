@@ -3,15 +3,51 @@ const chatContainer = document.getElementById('chatContainer');
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
 const typingIndicator = document.getElementById('typingIndicator');
+const examplesContainer = document.getElementById('examplesContainer');
 
 // 示例问题
 const exampleQuestions = [
-    "什么是人工智能？",
-    "Python如何连接数据库？",
-    "解释量子计算的基本概念",
-    "如何学习编程？",
-    "写一首关于春天的短诗"
-];
+            {
+                text: "什么是人工智能？",
+                icon: "fas fa-brain",
+                category: "概念解释"
+            },
+            {
+                text: "Python如何连接数据库？",
+                icon: "fas fa-database",
+                category: "编程技术"
+            },
+            {
+                text: "解释量子计算的基本概念",
+                icon: "fas fa-atom",
+                category: "科学技术"
+            },
+            {
+                text: "如何学习编程？",
+                icon: "fas fa-graduation-cap",
+                category: "学习建议"
+            },
+            {
+                text: "写一首关于春天的短诗",
+                icon: "fas fa-pen-fancy",
+                category: "创意写作"
+            },
+            {
+                text: "推荐几本经典科幻小说",
+                icon: "fas fa-book",
+                category: "书籍推荐"
+            },
+            {
+                text: "如何保持健康的生活方式？",
+                icon: "fas fa-heartbeat",
+                category: "健康生活"
+            },
+            {
+                text: "解释区块链技术的工作原理",
+                icon: "fas fa-link",
+                category: "技术解析"
+            }
+        ];
 
 // 初始化应用
 function initializeApp() {
@@ -182,23 +218,74 @@ function handleError(error) {
 
 // 创建示例问题按钮
 function createExampleButtons() {
-    const welcomeDiv = document.querySelector('.welcome-message');
-    const examplesDiv = document.createElement('div');
+//    const welcomeDiv = document.querySelector('.welcome-message');
+//    const examplesDiv = document.createElement('div');
+//
+//    examplesDiv.classList.add('examples-container');
+//
+//    exampleQuestions.forEach(question => {
+//        const btn = document.createElement('button');
+//        btn.classList.add('example-btn');
+//        btn.textContent = question;
+//        btn.addEventListener('click', () => {
+//            messageInput.value = question;
+//            sendMessage();
+//        });
+//        examplesDiv.appendChild(btn);
+//    });
+//
+//    welcomeDiv.appendChild(examplesDiv);
+//}
+ // 清空容器
+    examplesContainer.innerHTML = '';
 
-    examplesDiv.classList.add('examples-container');
+    // 添加分类标题
+    const categoryTitle = document.createElement('div');
+    categoryTitle.style.width = '100%';
+    categoryTitle.style.textAlign = 'center';
+    categoryTitle.style.margin = '10px 0 10px';
+    categoryTitle.style.fontSize = '1.4rem';
+    categoryTitle.style.color = '#4b6cb7';
+    categoryTitle.style.fontWeight = '400';
+    categoryTitle.textContent = '试试这些问题：';
+    examplesContainer.appendChild(categoryTitle);
 
+    // 创建按钮
     exampleQuestions.forEach(question => {
         const btn = document.createElement('button');
         btn.classList.add('example-btn');
-        btn.textContent = question;
+
+        // 添加图标
+        const icon = document.createElement('i');
+        icon.className = question.icon;
+        btn.appendChild(icon);
+
+        // 添加文本
+        const textSpan = document.createElement('span');
+        textSpan.textContent = question.text;
+        btn.appendChild(textSpan);
+
+        // 添加分类标签（在按钮底部）
+        const categoryTag = document.createElement('div');
+        categoryTag.style.position = 'absolute';
+        categoryTag.style.top = '1px';
+        categoryTag.style.left = '5px';
+        categoryTag.style.fontSize = '0.7rem';
+        categoryTag.style.color = '#1976d2';
+        categoryTag.style.background = 'rgba(255, 255, 255, 0.7)';
+        categoryTag.style.padding = '2px 8px';
+        categoryTag.style.borderRadius = '10px';
+        categoryTag.textContent = question.category;
+        btn.appendChild(categoryTag);
+
+        // 添加点击事件
         btn.addEventListener('click', () => {
-            messageInput.value = question;
+            messageInput.value = question.text;
             sendMessage();
         });
-        examplesDiv.appendChild(btn);
-    });
 
-    welcomeDiv.appendChild(examplesDiv);
+        examplesContainer.appendChild(btn);
+    });
 }
 
 // 当文档加载完成后初始化应用
