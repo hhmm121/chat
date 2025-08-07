@@ -8,10 +8,15 @@ Created on 2025/8/6 15:22
 
 @Describe: 
 """
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import random
 import time
+import asyncio
+from datetime import datetime, timedelta
+from typing import List, Optional
+import aiomysql
+from contextlib import asynccontextmanager
 
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import StreamingResponse
@@ -29,12 +34,15 @@ app.add_middleware(
     expose_headers=["*"]
 )
 
+# 数据模型
 class ChatRequest(BaseModel):
     message: str
-
+    chat_id: Optional[str] = None
 
 class ChatResponse(BaseModel):
     reply: str
+    chat_id: str
+
 
 
 @app.post("/chat")
@@ -52,7 +60,6 @@ async def chat_endpoint(request: ChatRequest):
         }
     )
 
-
 @app.get("/")
 async def root():
     return {"status": "running", "message": "Chat API is ready"}
@@ -60,5 +67,4 @@ async def root():
 
 if __name__ == "__main__":
     import uvicorn
-
     uvicorn.run('server:app', host="192.168.51.2", port=8002)

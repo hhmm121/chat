@@ -269,7 +269,7 @@ function createExampleButtons() {
         const categoryTag = document.createElement('div');
         categoryTag.style.position = 'absolute';
         categoryTag.style.top = '1px';
-        categoryTag.style.left = '5px';
+        categoryTag.style.left = 'px';
         categoryTag.style.fontSize = '0.7rem';
         categoryTag.style.color = '#1976d2';
         categoryTag.style.background = 'rgba(255, 255, 255, 0.7)';
