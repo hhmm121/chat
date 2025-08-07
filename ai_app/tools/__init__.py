@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on 2025/8/6 16:14
+Created on 2025/8/7 13:51
 
-@Project -> File: PythonProject -> __init__.py
+@Project -> File: Chat_Assistant -> __init__.py
 
 @Author: ouzhihui
 

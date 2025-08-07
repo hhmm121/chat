@@ -8,6 +8,10 @@ Created on 2025/8/6 15:22
 
 @Describe: 
 """
+import logging
+import os
+import warnings
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import random
@@ -22,6 +26,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import StreamingResponse
 
 from ai_app.chat.chat import get_ai_response
+from ai_app.tools.config_loader import config_loader
+
+warnings.filterwarnings('ignore')
+os.environ['NUMEXPR_MAX_THREADS'] = '8'
+config_loader.set_logging()
+_logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
@@ -42,8 +52,6 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     reply: str
     chat_id: str
-
-
 
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):

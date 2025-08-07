@@ -1,0 +1,48 @@
+# 大模型参数
+api_key: 'sk-c6163e4f30ab457db6fae9678430c451'
+base_url: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+model: 'deepseek-v3'
+
+
+# ============ 日志 ============
+logging:
+    version: 1
+    'disable_existing_loggers': False
+    formatters:
+        simpleFormater:
+            format: '%(asctime)s - %(levelname)s - %(filename)s[line:%(lineno)d]: %(message)s'
+            datefmt: '%Y-%m-%d %H:%M:%S'
+    handlers:
+        console_handler:
+            level: DEBUG
+            class: logging.StreamHandler
+            formatter: simpleFormater
+            stream: ext://sys.stdout
+        info_handler:
+            level: INFO
+            class: logging.FileHandler
+            formatter: simpleFormater
+            filename: data/logs/social-media-information/INFO.logs
+            encoding: utf8
+        error_handler:
+            level: ERROR
+            class: logging.FileHandler
+            formatter: simpleFormater
+            filename: data/logs/social-media-information/ERROR.logs
+            encoding: utf8
+    root:
+        level: INFO
+        handlers: [console_handler, info_handler, error_handler]
+    loggers:
+        asyncio:
+            level: DEBUG
+            handlers: [ console_handler ]  # 只输出到控制台
+            propagate: False
+        uvicorn:
+            level: INFO
+            handlers: [ console_handler, info_handler ]
+            propagate: False
+        uvicorn.error:
+            level: ERROR
+            handlers: [ error_handler ]
+            propagate: False
